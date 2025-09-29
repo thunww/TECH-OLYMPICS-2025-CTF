@@ -17,16 +17,6 @@ A Node.js application with a hidden admin preview endpoint protected by weak hea
 
 The admin endpoint checks only HTTP headers for authentication:
 
-```javascript
-if (req.get("X-CTF") !== "player") {
-  return res.status(403).send("Forbidden");
-}
-
-if (req.get("Sec-Fetch-Dest") !== "iframe") {
-  return res.status(403).send("iframe");
-}
-```
-
 <img src="images/image_9.png" alt="Vulnerability Analysis" width="600">
 
 Headers can be easily spoofed, and tokens are exposed in client-side code.
@@ -74,3 +64,4 @@ curl "http://65.109.176.78:3000/admin/preview_blob?token=0a47aae740429ec0de33b61
 ---
 
 _Author: Gia Than_
+
