@@ -137,13 +137,13 @@ https://google.com/url?q=https%3A%2F%2Ftranslate.google.com%2Ftranslate%3Fu%3Dht
 
 ### Step 3: Execution Flow
 
-✅ Validation passes: URL starts with https://google.com/ and hostname matches
-✅ Google URL service: Redirects to Google Translate with encoded parameter
-✅ Google Translate proxy: Fetches content from webhook.site
-✅ Webhook responds: Returns HTML with JavaScript redirect
-✅ Puppeteer executes: JavaScript runs in server context, navigates to localhost
-✅ Flag endpoint: IP check passes (request from 127.0.0.1), returns flag
-🚩 Server responds: Returns rendered page content containing the flag
+1.  **Validation passes**: URL starts with `https://google.com/` and hostname matches
+2.  **Google URL service**: Redirects to Google Translate with encoded parameter
+3.  **Google Translate proxy**: Fetches content from webhook.site
+4.  **Webhook responds**: Returns HTML with JavaScript redirect
+5.  **Puppeteer executes**: JavaScript runs in server context, navigates to localhost
+6.  **Flag endpoint**: IP check passes (request from 127.0.0.1), returns flag
+7.  **Server responds**: Returns rendered page content containing the flag
 
 ### Step 4: Result
 
