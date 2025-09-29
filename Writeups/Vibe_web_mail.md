@@ -20,17 +20,6 @@ However, the sandbox fails because:
 - Object traversal through `sys.modules` is possible
 - No restriction on accessing loaded modules via registry
 
-## POSIX Module Background
-
-The `posix` module is Python's low-level interface to POSIX operating system calls on Unix-like systems (Linux, macOS, etc.). It provides direct access to:
-
-- **Environment variables** (`environ`)
-- **File system operations** (`open`, `read`, `write`)
-- **Process management** (`fork`, `exec`, `getpid`)
-- **System information** (`uname`, `getuid`)
-
-In Python sandbox escapes, `posix` is particularly valuable because it bridges the gap between Python code and the underlying operating system, often containing sensitive information like environment variables where flags are commonly stored.
-
 ## Exploitation
 
 ### Step 1: Reconnaissance
@@ -59,9 +48,18 @@ Test access to permitted `datetime` module:
 Traverse from `datetime` to `sys.modules` to enumerate loaded modules:
 
 **Payload:** `list(datetime.sys.modules.keys())`  
-**Result:** List of all loaded Python modules
+**Result:** Comprehensive list of all loaded Python modules, revealing multiple potential escape vectors including `posix`, `os`, `_io`, and `subprocess`
 
 <img src="images/image_3.png" alt="Step 3 - Enumerate loaded modules" width="600">
+
+**Key modules identified:**
+
+- `posix` - Unix system interface (chosen for exploit)
+- `os` - High-level OS interface
+- `_io` - Low-level I/O operations
+- `subprocess` - Process execution capabilities
+
+The enumeration reveals that while multiple system modules are available as potential gadgets, `posix` provides the most direct path to environment variable access through its `environ` attribute.
 
 ### Step 4: POSIX Module Access
 
